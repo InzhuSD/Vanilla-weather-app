@@ -1,0 +1,19 @@
+body {
+  font-family: arial, sans-serif;
+}
+
+h1 {
+  color: #ad1919;
+  font-size: 24px;
+  font-weight: 100;
+  line-height: 28px;
+  margin: 0;
+}
+
+.row {
+  padding: 30px;
+}
+
+h5 {
+  color: red;
+}

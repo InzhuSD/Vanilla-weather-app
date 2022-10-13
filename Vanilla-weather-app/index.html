@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vanilla Weather Application</title>
+    <meta charset="UTF-8" />
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <link href="src/style.css" rel="stylesheet" type="text/css" />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+
+
+  </head>
+
+  <body>
+    
+    <form id="search-form">
+    
+        <div class="row">
+            <div class="col-6">
+              <input
+                type="search"
+                placeholder="Type a city.."
+                autofocus="on"
+                autocomplete="off"
+                id="city-input"
+                class="form-control shadow-sm"
+              />
+            </div>
+            <div class="col-3">
+              <input
+                type="submit"
+                value="Search"
+                class="form-control btn btn-primary shadow-sm"
+              />
+            </div>
+          
+        
+<div class="col-3"> 
+    <button class = "btn btn-success w-100"
+    id="current-location-button">
+
+    Current 
+    </button>
+</div>
+
+
+</div>
+          
+
+          <div class="col-4">
+            <div class="mb-3">
+              <div class="card" style="width: 36rem; margin-left: 30px;">
+                <div class="card-body">
+                  <h5 class="card-title" id="city"> Current Location: A Estrada, Spain </h5>
+                  
+                  <span id="current-date"> </span>
+
+                  <h5 class="card-text">Current temperature: 
+                    <span class="temperature" id="temperature"> 23 </span>
+                    <span class="units"> <a href="#" id="celsius-link">°C </a> / <a href="#" id="fahrenheit-link"> °F </a> </span>
+                    <span> <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="Cloudy"> </span>
+                  </h5>
+                  <p>
+                    Day°C/Night°C: 23°C / 18°C
+                  </p>
+                  <p class="card-text-ad">
+                    <ul>
+                        <li> <span id="description">Partly cloudy</span></li>
+                    <li> Humidity: <span id="humidity">88</span>%</li>
+                    <li> Wind: <span id="wind"> 15</span>km/h</li>
+                    
+                  </ul>
+                </p>
+                </div>
+              </div>
+            </div>
+
+            
+          
+        
+
+            <div class="col" >
+              <div class="mb-3" >
+                <div class="card" style="width: 18rem; margin-left: 30px;" >
+                  <div class="card-body" >
+                    <p class="card-text" id="city-days">
+                      Tomorrow: Friday 05/08/2022
+                      <br />
+                      Current Location: A Estrada, Spain
+                      <br />
+                      Max.temperature: 21°C
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col">
+                  <div class="mb-3">
+                    <div class="card" style="width: 18rem; margin-left: 30px;">
+                      <div class="card-body">
+                        <p class="card-text">
+                          Saturday 06/08/2022
+                          <br />
+                          Current Location: A Estrada, Spain
+                          <br />
+                          Max.temperature: 24°C
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                      <div class="mb-3">
+                        <div class="card" style="width: 18rem; margin-left: 30px;">
+                          <div class="card-body">
+                            <p class="card-text">
+                              Sunday 07/08/2022
+                              <br />
+                              Current Location: A Estrada, Spain
+                              <br />
+                              Max.temperature: 25°C
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col">
+                          <div class="mb-3">
+                            <div class="card" style="width: 18rem; margin-left: 30px;">
+                              <div class="card-body">
+                                <p class="card-text">
+                                  Monday 08/08/2022
+                                  <br />
+                                  Current Location: A Estrada, Spain
+                                  <br />
+                                  Max.temperature: 25°C
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col">
+                              <div class="mb-3">
+                                <div class="card" style="width: 18rem; margin-left: 30px;">
+                                  <div class="card-body">
+                                    <p class="card-text">
+                                      Tuesday 09/08/2022
+                                      <br />
+                                      Current Location: A Estrada, Spain
+                                      <br />
+                                      Max.temperature: 25°C
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <script>
+
+    function formatDate(date) {
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  let dayIndex = date.getDay();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
+
+  let day = days[dayIndex];
+  return `${day} ${hours}:${minutes}`;
+}
+
+function displayWeatherCondition (response) {
+    console.log(response);
+    document.querySelector("#city").innerHTML=response.data.name;
+    document.querySelector("#temperature").innerHTML = Math.round(response.data.main.temp
+    );
+    document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+    document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
+    document.querySelector("#description").innerHTML = response.data.weather[0].main;
+
+
+}
+
+function searchCity (city) {
+    let apiKey = "445d1176ab1c04483600fd244cc155cb";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+    axios.get(apiUrl).then(displayWeatherCondition);
+}
+
+function handleSubmit (event) {
+    event.preventDefault();
+    let city = document.querySelector("#city-input").value;
+    searchCity(city);
+}
+
+function searchLocation (position) {
+    let apiKey = "445d1176ab1c04483600fd244cc155cb";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayWeatherCondition);
+}
+
+function getCurrentLocation (event) {
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(searchLocation);
+}
+
+function convertToFahrenheit (event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHtML = 73;
+}
+
+function convertToCelsius (event) {
+event.preventDefault();
+let temperatureElement = document.querySelector("#temperature");
+temperatureElement.innerHTML = 23;
+}
+
+let dateElement = document.querySelector("#current-date");
+let currentTime = new Date();
+dateElement.innerHTML = formatDate(currentTime);
+
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", handleSubmit);
+
+
+let fahrenheitLink = document.querySelector ("#fahrenheit-link");
+fahrenheitLink.addEventListener ("click", convertToFahrenheit);
+
+let celsiusLink = document.querySelector ("#celsius-link");
+celsiusLink.addEventListener ("click", convertToCelsius);
+
+let currentLocationButton = document.querySelector ("#current-location-button"); 
+currentLocationButton.addEventListener("click", getCurrentLocation);
+
+searchCity ("New York");
+
+function showTemperature (response) {
+let temperature = Math.round (response.data.main.temp);
+}
+ 
+
+
+
+
+    </script>
+  </body>
+</html>
