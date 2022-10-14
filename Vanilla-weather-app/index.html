@@ -52,13 +52,11 @@
                     <span class="units"> <a href="#" id="celsius-link">°C </a> / <a href="#" id="fahrenheit-link"> °F </a> </span>
                     <span> <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="Cloudy"> </span>
           </h2>
-          <p class="card-text-ad">
             <ul>
               <li> <span id="description">Partly cloudy</span></li>
               <li> Humidity: <span id="humidity">88</span>%</li>
               <li> Wind: <span id="wind"> 15</span>km/h</li>
             </ul>
-          </p>
       </div>
         
 <div class="weather-forecast" id="forecast"> </div>
@@ -71,11 +69,11 @@
     <div class="card" style="width: 15rem;" >
       <div class="card-body" >
         <p class="card-text" id="city-days">
-          Tomorrow: Friday 05/08/2022
+          Friday 05/08/2022
             <br />
-            Current Location: A Estrada, Spain
+            emoji
             <br />
-            Max.temperature: 21°C
+            21°C / 11°C
         </p>
       </div>
     </div>
@@ -89,9 +87,9 @@
         <p class="card-text">
             Saturday 06/08/2022
               <br />
-              Current Location: A Estrada, Spain
+              emoji
               <br />
-              Max.temperature: 24°C
+              24°C / 14°C
         </p>
       </div>
     </div>
@@ -105,9 +103,9 @@
         <p class="card-text">
           Sunday 07/08/2022
             <br />
-            Current Location: A Estrada, Spain
+            Emoji
             <br />
-            Max.temperature: 25°C
+            25°C / 15°C
         </p>
       </div>
     </div>
@@ -121,9 +119,9 @@
         <p class="card-text">
           Monday 08/08/2022
           <br />
-           Current Location: A Estrada, Spain
+           emoji
           <br />
-          Max.temperature: 25°C
+          25°C / 13°C
         </p>
       </div>
     </div>
@@ -137,9 +135,9 @@
         <p class="card-text">
           Tuesday 09/08/2022
             <br />
-            Current Location: A Estrada, Spain
+            emoji
             <br />
-            Max.temperature: 25°C
+            25°C / 13°C
             </p>
       </div>
     </div>
@@ -194,8 +192,6 @@ function displayWeatherCondition (response) {
     document.querySelector("#humidity").innerHTML = response.data.main.humidity;
     document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
     document.querySelector("#description").innerHTML = response.data.weather[0].main;
-
-
 }
 
 function searchCity (city) {
@@ -257,10 +253,6 @@ function showTemperature (response) {
 let temperature = Math.round (response.data.main.temp);
 }
  
-
-
-
-
     </script>
   </body>
 </html>
