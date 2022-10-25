@@ -42,9 +42,13 @@ function displayForecast(response) {
         forecastHTML +
         `
       <div class = "col-2">
-            <div class = "weather-forecast-date">${day}</div>
+            <div class = "weather-forecast-date">${formatDay(
+              forecastDay.dt
+            )}</div>
             <img
-            src="http://openweathermap.org/img/wn/50d@2x.png"
+            src="http://openweathermap.org/img/wn/${
+              forecastDay.weather[0].icon
+            }@2x.png"
             alt=""
             width="42"
             />
@@ -132,13 +136,13 @@ function displayCelciusTemperature(event) {
 
 let celciusTemperature = null;
 
-let form = document.querySelector("#search-form");
-form.addEventListener("submit", handleSubmit);
-
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 
 let celciusLink = document.querySelector("#celcius-link");
 celciusLink.addEventListener("click", displayCelciusTemperature);
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
 
 search("New York");
